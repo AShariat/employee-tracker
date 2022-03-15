@@ -1,0 +1,60 @@
+INSERT INTO departments (department_name)
+  VALUES
+    ('Electronics'), ('Hardware'), ('Sporting Goods'), ('Garden Center'), ('Toys'), ('Stationary'), ('Furniture'), ('Houseware'), ('Cosmetics'), ('Pharmacy');
+
+INSERT INTO jobs (job_title, salary, department_id)
+  VALUES
+    ('Department Manager', 50000, 1), ('Sales Associate', 40000, 1), ('Cashier', 30000, 1);
+
+INSERT INTO employees (first_name, last_name, job_id, manager_id)
+  VALUES
+    ('James', 'Fraser', 1, 1),
+    ('Jack', 'London', 2, 1),
+    ('Robert', 'Bruce', 2, 1),
+    ('Peter', 'Greenaway', 2, 1),
+    ('Derek', 'Jarman', 2, 1),
+    ('Paolo', 'Pasolini', 2, 1),
+    ('Heathcote', 'Williams', 2, 1),
+    ('Sandy', 'Powell', 2, 1),
+    ('Emil', 'Zola', 2, 1),
+    ('Sissy', 'Coalpits', 2, 1),
+    ('Antoinette', 'Capet', 2, 1),
+    ('Samuel', 'Delany', 2, 1),
+    ('Tony', 'Duvert', 2, 1),
+    ('Dennis', 'Cooper', 2, 1),
+    ('Monica', 'Bellucci', 2, 1),
+    ('Samuel', 'Johnson', 2, 1),
+    ('John', 'Dryden', 2, 1),
+    ('Alexander', 'Pope', 2, 1),
+    ('Lionel', 'Johnson', 2, 1),
+    ('Aubrey', 'Beardsley', 2, 1),
+    ('Tulse', 'Luper', 2, 1),
+    ('William', 'Morris', 2, 1),
+    ('George', 'Shaw', 2, 1),
+    ('Arnold', 'Bennett', 2, 1),
+    ('Algernon', 'Blackwood', 2, 1),
+    ('Rhoda', 'Broughton', 2, 1),
+    ('Hart', 'Crane', 2, 1),
+    ('Vitorio', 'DeSica', 3, 1),
+    ('Wilkie', 'Collins', 3, 1),
+    ('Elizabeth', 'Gaskell', 3, 1),
+    ('George', 'Sand', 3, 1),
+    ('Vernon', 'Lee', 3, 1),
+    ('Arthur', 'Machen', 3, 1),
+    ('Frederick', 'Marryat', 3, 1),
+    ('Harriet', 'Martineau', 3, 1),
+    ('George', 'Meredith', 3, 1),
+    ('Margaret', 'Oliphant', 3, 1),
+    ('Anthony', 'Trollope', 3, 1),
+    ('Charlotte', 'Yonge', 3, 1),
+    ('Horace', 'Walpole', 3, 1),
+    ('Matthew', 'Lewis', 3, 1),
+    ('William', 'Bedford', 3, 1),
+    ('Anne', 'Radcliffe', 3, 1),
+    ('Charles', 'Brown', 3, 1),
+    ('Eliza', 'Parsons', 3, 1),
+    ('Susan', 'Hill', 3, 1),
+    ('Sydney', 'Owenson', 3, 1),
+    ('Hubert', 'Crackanthorpe', 3, 1),
+    ('William', 'Carleton', 3, 1),
+    ('Gerald', 'Griffin', 3, 1);
