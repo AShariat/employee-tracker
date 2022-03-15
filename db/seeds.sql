@@ -2,11 +2,11 @@ INSERT INTO departments (department_name)
   VALUES
     ('Electronics'), ('Hardware'), ('Sporting Goods'), ('Garden Center'), ('Toys'), ('Stationary'), ('Furniture'), ('Houseware'), ('Cosmetics'), ('Pharmacy');
 
-INSERT INTO jobs (job_title, salary, department_id)
+INSERT INTO roles (role_title, salary, department_id)
   VALUES
     ('Department Manager', 50000, 1), ('Sales Associate', 40000, 1), ('Cashier', 30000, 1);
 
-INSERT INTO employees (first_name, last_name, job_id, manager_id)
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
   VALUES
     ('James', 'Fraser', 1, 1),
     ('Jack', 'London', 2, 1),
