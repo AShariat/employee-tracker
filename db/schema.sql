@@ -21,5 +21,6 @@ CREATE TABLE employees (
   last_name VARCHAR(30) NOT NULL,
   manager_id INTEGER NOT NULL,
   role_id INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
