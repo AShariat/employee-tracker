@@ -18,7 +18,7 @@ function displayDepartments() {
 };
 
 function displayRoles() {
-  const sql = `SELECT roles.id, roles.role_title, roles.salary, departments.department_name FROM roles INNER JOIN departments ON roles.department_id = departments.id;`;
+  const sql = `SELECT roles.id, roles.role_title, roles.salary, departments.department_name FROM roles LEFT JOIN departments ON roles.department_id = departments.id;`;
   db.query(sql, (err,rows) => {
     if (err) {
       if (err) throw err;
@@ -64,7 +64,7 @@ function addDepartment() {
     {
       type: 'input',
       name: 'newDepartmentName',
-      message: 'What is the Name of the department?'
+      message: 'What is the Name of the department?(Required)'
     }
   ])
   .then(respond => {
@@ -89,17 +89,17 @@ function addRole() {
     {
       type: 'input',
       name: 'newRoleName',
-      message: 'What is the name of the role?'
+      message: 'What is the name of the role?(Required)'
     },
     {
       type: 'input',
       name: 'newRoleSalary',
-      message: 'What is the salary of the role?'
+      message: 'What is the salary of the role?(Required)'
     },
     {
       type: 'input',
       name: 'newRoleDepartment',
-      message: 'Which department does the role belong to?'
+      message: 'Which department does the role belong to?(Required)'
     }
   ])
   .then(respond => {
@@ -124,22 +124,22 @@ function addEmployee() {
     {
       type: 'input',
       name: 'newEmployeeFirstName',
-      message: "What is the employee's first name?"
+      message: "What is the employee's first name?(Required)"
     },
     {
       type: 'input',
       name: 'newEmployeeLastName',
-      message: "What is the employee's last name?"
+      message: "What is the employee's last name?(Required)"
     },
     {
       type: 'input',
       name: 'newEmployeeRole',
-      message: "What is the employee's role?"
+      message: "What is the employee's role's id?(Required)",
     },
     {
       type: 'input',
       name: 'newEmployeeManager',
-      message: "Who is the employee's manager?"
+      message: "Who is the employee's manager?(Required)"
     }
   ])
   .then(respond => {
