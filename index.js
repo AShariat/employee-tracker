@@ -1,6 +1,5 @@
-// Dependencies.
 const inquirer = require('inquirer');
-const { displayDepartments, displayRoles, displayEmployees, addDepartment } = require('./utils/display.js');
+const { displayDepartments, displayRoles, displayEmployees, addDepartment, addRole } = require('./utils/display.js');
 
 const promptQuestions = () => {
   return inquirer.prompt([
@@ -29,7 +28,7 @@ function start() {
     } else if (answer.selections === "Add a Department") {
       return addDepartment();
     } else if (answer.selections === "Add a Role") {
-      console.log("Add a Role");
+      return addRole();
     } else if (answer.selections === "Add an Employee") {
       console.log("Add an Employee");
     } else if (answer.selections === "Update an Employee Role") {
@@ -37,7 +36,6 @@ function start() {
     } else {
       process.exit();
     }  
-    // return displayAnswer(answer);
   })
   .catch(err => {
     console.log(err);
