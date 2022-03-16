@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS mymart;
+CREATE DATABASE mymart;
+USE mymart;
