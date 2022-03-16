@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 const db = require('../db/connection.js');
 
-function displayDepartments(answer) {
+function displayDepartments() {
   const sql = `SELECT * FROM departments`;
   db.query(sql, (err,rows) => {
     if (err) {
@@ -13,10 +13,11 @@ function displayDepartments(answer) {
       values[i] = [rows[i].id, rows[i].department_name];
     }
     console.table(['Department ID', 'Department Name'], values);
+    process.exit();
   });
 };
 
-function displayRoles(answer) {
+function displayRoles() {
   const sql = `SELECT roles.id, roles.role_title, roles.salary, departments.department_name FROM roles INNER JOIN departments ON roles.department_id = departments.id;`;
   db.query(sql, (err,rows) => {
     if (err) {
@@ -27,10 +28,11 @@ function displayRoles(answer) {
       values[i] = [rows[i].id, rows[i].role_title, rows[i].department_name, rows[i].salary];
     }
     console.table(['Role ID', 'Job Title', 'Department Name', 'Salary'], values);
+    process.exit();
   });
 };
 
-function displayEmployees(answer) {
+function displayEmployees() {
   const sql = `SELECT employees.created_at, employees.id, employees.first_name, employees.last_name, employees.manager_id, roles.role_title, roles.salary, departments.department_name FROM employees LEFT JOIN roles ON role_id = roles.id LEFT JOIN departments ON roles.department_id = departments.id;`;
   db.query(sql, (err,rows) => {
     if (err) {
@@ -41,6 +43,7 @@ function displayEmployees(answer) {
       values[i] = [rows[i].id, rows[i].first_name, rows[i].last_name,  rows[i].role_title, rows[i].department_name, rows[i].salary, rows[i].manager_id, rows[i].created_at];
     }
     console.table(['Employee ID', 'First Name', 'Last Name', 'Job Title', 'Department', 'Salary', 'Manager ID', 'Hire Date'], values);
+    process.exit();
   });
 };
 
@@ -52,7 +55,8 @@ function newDepartment(name) {
       if (err) throw err;
     }
     console.log(`"Added ${name} to the database!"`);
-  })
+    return displayDepartments();
+  });
 };
 
 function addDepartment() {
@@ -60,7 +64,7 @@ function addDepartment() {
     {
       type: 'input',
       name: 'newDepartmentName',
-      message: 'What is the Name of the department?',
+      message: 'What is the Name of the department?'
     }
   ])
   .then(respond => {
@@ -76,7 +80,8 @@ function newRole(name, salary, department) {
       if (err) throw err;
     }
     console.log(`"Added ${name} to the database!"`);
-  })
+    return displayRoles();
+  });
 };
 
 function addRole() {
@@ -84,21 +89,61 @@ function addRole() {
     {
       type: 'input',
       name: 'newRoleName',
-      message: 'What is the name of the role?',
+      message: 'What is the name of the role?'
     },
     {
       type: 'input',
       name: 'newRoleSalary',
-      message: 'What is the salary of the role?',
+      message: 'What is the salary of the role?'
     },
     {
       type: 'input',
       name: 'newRoleDepartment',
-      message: 'Which department does the role belong to?',
+      message: 'Which department does the role belong to?'
     }
   ])
   .then(respond => {
-    return newRole(respond.newRoleName, respond.newRoleSalary,respond.newRoleDepartment);
+    return newRole(respond.newRoleName, respond.newRoleSalary, respond.newRoleDepartment);
+  });
+};
+
+function newEmployee(firstName, lastName, role, manager) {
+  const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);`;
+  const params = [firstName, lastName, role, manager];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      if (err) throw err;
+    }
+    console.log(`"Added ${firstName} ${lastName} to the database!"`);
+    return displayEmployees();
+  });
+};
+
+function addEmployee() {
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'newEmployeeFirstName',
+      message: "What is the employee's first name?"
+    },
+    {
+      type: 'input',
+      name: 'newEmployeeLastName',
+      message: "What is the employee's last name?"
+    },
+    {
+      type: 'input',
+      name: 'newEmployeeRole',
+      message: "What is the employee's role?"
+    },
+    {
+      type: 'input',
+      name: 'newEmployeeManager',
+      message: "Who is the employee's manager?"
+    }
+  ])
+  .then(respond => {
+    return newEmployee(respond.newEmployeeFirstName, respond.newEmployeeLastName, respond.newEmployeeRole, respond.newEmployeeManager);
   });
 };
 
@@ -107,5 +152,6 @@ module.exports = {
   displayRoles,
   displayEmployees,
   addDepartment,
-  addRole
+  addRole,
+  addEmployee
 };
