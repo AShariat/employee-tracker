@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { displayDepartments, displayRoles, displayEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole } = require('./utils/display.js');
+const { displayDepartments, displayRoles, displayEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, updateEmployeeManager } = require('./utils/display.js');
 
 const promptQuestions = () => {
   return inquirer.prompt([
@@ -7,7 +7,7 @@ const promptQuestions = () => {
       type: 'list',
       name: 'selections',
       message: 'What would you like to do?',
-      choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role', 'EXIT!'],
+      choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', "Update an Employee's Role", "Update an Employee's Manager", 'EXIT!'],
       default:'EXIT!'
     }
   ])
@@ -31,8 +31,10 @@ function start() {
       return addRole();
     } else if (answer.selections === "Add an Employee") {
       return addEmployee();
-    } else if (answer.selections === "Update an Employee Role") {
+    } else if (answer.selections === "Update an Employee's Role") {
       return updateEmployeeRole();
+    } else if (answer.selections === "Update an Employee's Manager") {
+      return updateEmployeeManager();
     } else {
       process.exit();
     }  

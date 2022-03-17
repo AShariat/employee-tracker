@@ -64,7 +64,15 @@ function addDepartment() {
     {
       type: 'input',
       name: 'newDepartmentName',
-      message: 'What is the Name of the department?(Required)'
+      message: 'What is name of the new department?(Required)',
+      validate: newDepartmentNameInput => {
+        if (newDepartmentNameInput) {
+          return true;
+        } else {
+          console.log("Please enter name of the new department!");
+          return false;
+        }
+      }
     }
   ])
   .then(respond => {
@@ -89,17 +97,41 @@ function addRole() {
     {
       type: 'input',
       name: 'newRoleName',
-      message: 'What is the name of the role?(Required)'
+      message: 'What is name of the new role?(Required)',
+      validate: newRoleNameInput => {
+        if (newRoleNameInput) {
+          return true;
+        } else {
+          console.log("Please enter name of the new role!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'newRoleSalary',
-      message: 'What is the salary of the role?(Required)'
+      message: 'What is salary of the new role?(Required)',
+      validate: newRoleSalaryInput => {
+        if (newRoleSalaryInput) {
+          return true;
+        } else {
+          console.log("Please enter salary of the new role!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'newRoleDepartment',
-      message: 'Which department does the role belong to?(Required)'
+      message: 'Which department does the role belong to?(Required)',
+      validate: newRoleDepartmentInput => {
+        if (newRoleDepartmentInput) {
+          return true;
+        } else {
+          console.log("Please enter department of the new role!");
+          return false;
+        }
+      }
     }
   ])
   .then(respond => {
@@ -124,22 +156,54 @@ function addEmployee() {
     {
       type: 'input',
       name: 'newEmployeeFirstName',
-      message: "What is the employee's first name?(Required)"
+      message: "What is new employee's first name?(Required)",
+      validate: newEmployeeFirstNameInput => {
+        if (newEmployeeFirstNameInput) {
+          return true;
+        } else {
+          console.log("Please enter new employee's first name!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'newEmployeeLastName',
-      message: "What is the employee's last name?(Required)"
+      message: "What is new employee's last name?(Required)",
+      validate: newEmployeeLastNameInput => {
+        if (newEmployeeLastNameInput) {
+          return true;
+        } else {
+          console.log("Please enter new employee's last name!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'newEmployeeRole',
-      message: "What is the employee's role's id?(Required)",
+      message: "What is new employee's role's id?(Required)",
+      validate: newEmployeeRoleInput => {
+        if (newEmployeeRoleInput) {
+          return true;
+        } else {
+          console.log("Please enter new employee's role's id!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'newEmployeeManager',
-      message: "Who is the employee's manager?(Required)"
+      message: "What is new employee's manager's id?(Required)",
+      validate: newEmployeeManagerInput => {
+        if (newEmployeeManagerInput) {
+          return true;
+        } else {
+          console.log("Please enter new employee's manager's id!");
+          return false;
+        }
+      }
     }
   ])
   .then(respond => {
@@ -164,16 +228,78 @@ function updateEmployeeRole() {
     {
       type:'input',
       name: 'updateEmployeeRoleId',
-      message: "What is the employee's ID of the employee that you want to update their role?(Required)"
+      message: "What is the employee's ID of the employee that you want to update their role?(Required)",
+      validate: updateEmployeeRoleIdInput => {
+        if (updateEmployeeRoleIdInput) {
+          return true;
+        } else {
+          console.log("Please enter the employee's ID!");
+          return false;
+        }
+      }
     },
     {
       type:'input',
       name: 'updateEmployeeRoleNewRoleId',
-      message: "What is the employee's new role's ID?(Required)"
+      message: "What is the employee's new role's ID?(Required)",
+      validate: updateEmployeeRoleNewRoleIdInput => {
+        if (updateEmployeeRoleNewRoleIdInput) {
+          return true;
+        } else {
+          console.log("Please enter the employee's new role's ID!");
+          return false;
+        }
+      }
     }
   ])
   .then(respond => {
     return updateEmployeeRoleRender(respond.updateEmployeeRoleId, respond.updateEmployeeRoleNewRoleId);
+  });
+};
+
+function updateEmployeeManagerRender(id, manager) {
+  const sql = `UPDATE employees SET manager_id = ? WHERE id = ?;`;
+  const params = [manager, id];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      if (err) throw err;
+    }
+    console.log(`"Changed employee ${id} manager to ${manager} in the database!"`);
+    return displayEmployees();
+  });
+};
+
+function updateEmployeeManager() {
+  return inquirer.prompt([
+    {
+      type:'input',
+      name: 'updateEmployeeManagerId',
+      message: "What is the employee's ID of the employee that you want to update their manager?(Required)",
+      validate: updateEmployeeManagerIdInput => {
+        if (updateEmployeeManagerIdInput) {
+          return true;
+        } else {
+          console.log("Please enter the employee's ID!");
+          return false;
+        }
+      }
+    },
+    {
+      type:'input',
+      name: 'updateEmployeeManagerNewManagerId',
+      message: "What is the employee's new manager's ID?(Required)",
+      validate: updateEmployeeManagerNewManagerIdInput => {
+        if (updateEmployeeManagerNewManagerIdInput) {
+          return true;
+        } else {
+          console.log("Please enter the employee's new manager's ID!");
+          return false;
+        }
+      }
+    }
+  ])
+  .then(respond => {
+    return updateEmployeeManagerRender(respond.updateEmployeeManagerId, respond.updateEmployeeManagerNewManagerId);
   });
 };
 
@@ -184,5 +310,6 @@ module.exports = {
   addDepartment,
   addRole,
   addEmployee,
-  updateEmployeeRole
+  updateEmployeeRole,
+  updateEmployeeManager
 };
