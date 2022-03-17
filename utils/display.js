@@ -147,11 +147,42 @@ function addEmployee() {
   });
 };
 
+function updateEmployeeRoleRender(id, role) {
+  const sql = `UPDATE employees SET role_id = ? WHERE id = ?;`;
+  const params = [role, id];
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      if (err) throw err;
+    }
+    console.log(`"Changed employee ${id} role to ${role} in the database!"`);
+    return displayEmployees();
+  });
+};
+
+function updateEmployeeRole() {
+  return inquirer.prompt([
+    {
+      type:'input',
+      name: 'updateEmployeeRoleId',
+      message: "What is the employee's ID of the employee that you want to update their role?(Required)"
+    },
+    {
+      type:'input',
+      name: 'updateEmployeeRoleNewRoleId',
+      message: "What is the employee's new role's ID?(Required)"
+    }
+  ])
+  .then(respond => {
+    return updateEmployeeRoleRender(respond.updateEmployeeRoleId, respond.updateEmployeeRoleNewRoleId);
+  });
+};
+
 module.exports = {
   displayDepartments,
   displayRoles,
   displayEmployees,
   addDepartment,
   addRole,
-  addEmployee
+  addEmployee,
+  updateEmployeeRole
 };

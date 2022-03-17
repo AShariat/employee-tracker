@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { displayDepartments, displayRoles, displayEmployees, addDepartment, addRole, addEmployee } = require('./utils/display.js');
+const { displayDepartments, displayRoles, displayEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole } = require('./utils/display.js');
 
 const promptQuestions = () => {
   return inquirer.prompt([
@@ -32,7 +32,7 @@ function start() {
     } else if (answer.selections === "Add an Employee") {
       return addEmployee();
     } else if (answer.selections === "Update an Employee Role") {
-      console.log("Update an Employee Role");
+      return updateEmployeeRole();
     } else {
       process.exit();
     }  
