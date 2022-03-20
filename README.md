@@ -20,7 +20,11 @@ First users need to open the terminal inside the main directory of this app then
 
 ## Usage
 
-This video is a good example using this app:
+These videos are good examples of installation and using this app:
+
+https://user-images.githubusercontent.com/88262115/159144841-08578662-0638-4a7f-a75f-8e37d790ff15.mp4
+
+[Usage Video](https://drive.google.com/file/d/1FjvTn4_aH9Z5GhS0BPOVYY2IWcqzf0qY/view)
 
 ## License
 
