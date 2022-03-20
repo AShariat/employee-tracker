@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 const db = require('../db/connection.js');
 
+// This function is used to display all departments.
 function displayDepartments() {
   const sql = `SELECT * FROM departments`;
   db.query(sql, (err,rows) => {
@@ -17,6 +18,7 @@ function displayDepartments() {
   });
 };
 
+// This function is used to display all roles.
 function displayRoles() {
   const sql = `SELECT roles.id, roles.role_title, roles.salary, departments.department_name FROM roles LEFT JOIN departments ON roles.department_id = departments.id;`;
   db.query(sql, (err,rows) => {
@@ -32,6 +34,7 @@ function displayRoles() {
   });
 };
 
+// This function is used to display all employees.
 function displayEmployees() {
   const sql = `SELECT employees.created_at, employees.id, employees.first_name, employees.last_name, employees.manager_id, roles.role_title, roles.salary, departments.department_name FROM employees LEFT JOIN roles ON role_id = roles.id LEFT JOIN departments ON roles.department_id = departments.id;`;
   db.query(sql, (err,rows) => {
@@ -47,6 +50,7 @@ function displayEmployees() {
   });
 };
 
+// This function is used to add new department.
 function newDepartment(name) {
   const sql = `INSERT INTO departments (department_name) VALUES (?);`;
   const params = [name];
@@ -59,6 +63,7 @@ function newDepartment(name) {
   });
 };
 
+// This function is used to get information for adding new department.
 function addDepartment() {
   return inquirer.prompt([
     {
@@ -80,6 +85,7 @@ function addDepartment() {
   });
 };
 
+// This function is used to add new role.
 function newRole(name, salary, department) {
   const sql = `INSERT INTO roles (role_title, salary, department_id) VALUES (?, ?, ?);`;
   const params = [name, salary, department];
@@ -92,6 +98,7 @@ function newRole(name, salary, department) {
   });
 };
 
+// This function is used to get information for adding new role.
 function addRole() {
   return inquirer.prompt([
     {
@@ -139,6 +146,7 @@ function addRole() {
   });
 };
 
+// This function is used to add new employee.
 function newEmployee(firstName, lastName, role, manager) {
   const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);`;
   const params = [firstName, lastName, role, manager];
@@ -151,6 +159,7 @@ function newEmployee(firstName, lastName, role, manager) {
   });
 };
 
+// This function is used to get information for adding new employee.
 function addEmployee() {
   return inquirer.prompt([
     {
@@ -211,6 +220,7 @@ function addEmployee() {
   });
 };
 
+// This function is used to update employee's role.
 function updateEmployeeRoleRender(id, role) {
   const sql = `UPDATE employees SET role_id = ? WHERE id = ?;`;
   const params = [role, id];
@@ -223,6 +233,7 @@ function updateEmployeeRoleRender(id, role) {
   });
 };
 
+// This function is used to get information for updating employee's role.
 function updateEmployeeRole() {
   return inquirer.prompt([
     {
@@ -257,6 +268,7 @@ function updateEmployeeRole() {
   });
 };
 
+// This function is used to update employee's manager.
 function updateEmployeeManagerRender(id, manager) {
   const sql = `UPDATE employees SET manager_id = ? WHERE id = ?;`;
   const params = [manager, id];
@@ -269,6 +281,7 @@ function updateEmployeeManagerRender(id, manager) {
   });
 };
 
+// This function is used to get information for updating employee's manager.
 function updateEmployeeManager() {
   return inquirer.prompt([
     {

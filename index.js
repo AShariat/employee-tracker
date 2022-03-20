@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const { displayDepartments, displayRoles, displayEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, updateEmployeeManager } = require('./utils/display.js');
 
+// This function runs when user opens the app to see what the user wants to do.
 const promptQuestions = () => {
   return inquirer.prompt([
     {
