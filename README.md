@@ -24,7 +24,7 @@ These videos are good examples of installation and using this app:
 
 https://user-images.githubusercontent.com/88262115/159144841-08578662-0638-4a7f-a75f-8e37d790ff15.mp4
 
-[Usage Video](https://drive.google.com/file/d/10160dF1IvcJOGw26hdjNEcXwQTZfItK7/view)
+[Usage Video](https://watch.screencastify.com/v/AttVSYOePgrwerPlUY0F)
 
 ## License
 
